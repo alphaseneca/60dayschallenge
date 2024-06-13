@@ -32,6 +32,35 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scorekeeper = [];
+
+  List<String> questions = [
+    'The capital of France is Paris.',
+    'The square root of 16 is 5.',
+    'The chemical symbol for water is H2O.',
+    'The Great Wall of China is visible from space with the naked eye.',
+    'Python is a type of snake.',
+    'The Earth is flat.',
+    'Shakespeare wrote "To Kill a Mockingbird".',
+    'Humans have 23 pairs of chromosomes.',
+    'Venus is the closest planet to the Sun.',
+    'The Pacific Ocean is the largest ocean on Earth.',
+  ];
+
+  List<bool> answers = [
+    true,
+    false,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    false,
+    false,
+  ];
+
+  int questionNumber = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -44,7 +73,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                questions[questionNumber],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
@@ -71,16 +100,18 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
+                bool correctAnswer = answers[questionNumber];
+                if (correctAnswer == true) {
+                  print('User got it right!');
+                } else {
+                  print('User got it wrong!');
+                }
                 setState(
                   () {
-                    scorekeeper.add(
-                      Icon(
-                        Icons.check,
-                        color: Colors.green,
-                      ),
-                    );
+                    questionNumber++;
                   },
                 );
+                print(questionNumber);
               },
             ),
           ),
@@ -99,16 +130,18 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
+                bool correctAnswer = answers[questionNumber];
+                if (correctAnswer == false) {
+                  print('User got it right!');
+                } else {
+                  print('User got it wrong!');
+                }
                 setState(
                   () {
-                    scorekeeper.add(
-                      Icon(
-                        Icons.close,
-                        color: Colors.red,
-                      ),
-                    );
+                    questionNumber++;
                   },
                 );
+                print(questionNumber);
               },
             ),
           ),
@@ -122,3 +155,10 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
+
+// scorekeeper.add(
+//                       Icon(
+//                         Icons.check,
+//                         color: Colors.green,
+//                       ),
+//                     );
