@@ -1,3 +1,5 @@
+import 'package:rflutter_alert/rflutter_alert.dart';
+
 import 'question.dart';
 
 class QuizBrain {
@@ -46,5 +48,23 @@ class QuizBrain {
 
   bool getCorrectAnswer() {
     return _questionsbank[_questionNumber].questionAnswer;
+  }
+
+  bool isFinished(context) {
+    print(_questionNumber);
+    if (_questionNumber == _questionsbank.length - 1) {
+      Alert(
+        context: context,
+        title: 'Finished!',
+        desc: 'You\'ve reached the end of the quiz.',
+      ).show();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void reset() {
+    _questionNumber = 0;
   }
 }
