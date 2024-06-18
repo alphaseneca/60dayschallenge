@@ -110,9 +110,11 @@ class _InputPageState extends State<InputPage> {
                       min: minheight,
                       max: maxheight,
                       onChanged: (double newHeight) {
-                        setState(() {
-                          height = newHeight.toInt();
-                        });
+                        setState(
+                          () {
+                            height = newHeight.toInt();
+                          },
+                        );
                       },
                     ),
                   )
@@ -126,16 +128,97 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReusableCard(
-                    onTap: () {},
-                    cardChild: Container(),
                     colour: activeCardColour,
+                    onTap: () {},
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'WEIGHT',
+                          style: labelTextStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: numberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                setState(
+                                  () {
+                                    weight--;
+                                  },
+                                );
+                              },
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: () {
+                                setState(
+                                  () {
+                                    weight++;
+                                    print(weight);
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    onTap: () {},
-                    cardChild: Container(),
                     colour: activeCardColour,
+                    onTap: () {},
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'AGE',
+                          style: labelTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: numberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                setState(
+                                  () {
+                                    age--;
+                                  },
+                                );
+                              },
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: () {
+                                setState(
+                                  () {
+                                    age++;
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -149,6 +232,27 @@ class _InputPageState extends State<InputPage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class RoundIconButton extends StatelessWidget {
+  const RoundIconButton({required this.icon, required this.onPressed});
+  final IconData icon;
+  final Function() onPressed;
+  // if the function was declared as just "Function" it couldn't be assigned to the onPressed function
+  // as that expected void function and to make the function void it should be declared as "Function()".
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      child: Icon(icon),
+      constraints: BoxConstraints.tightFor(
+        width: 56.0,
+        height: 56.0,
+      ),
+      shape: CircleBorder(),
+      fillColor: Color(0xFF4C4F5E),
+      onPressed: onPressed,
     );
   }
 }
