@@ -1,3 +1,4 @@
+import 'package:bmicalculator/calculator_brain.dart';
 import 'package:bmicalculator/screens/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -166,7 +167,6 @@ class _InputPageState extends State<InputPage> {
                                 setState(
                                   () {
                                     weight++;
-                                    print(weight);
                                   },
                                 );
                               },
@@ -230,10 +230,16 @@ class _InputPageState extends State<InputPage> {
           BottomButton(
             bottomtitle: 'CALCULATE',
             onTap: () {
+              CalculatorBrain calc =
+                  CalculatorBrain(height: height, weight: weight);
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ResultsPage(),
+                  builder: (context) => ResultsPage(
+                    bmiResult: calc.calculateBMI(),
+                    resultText: calc.getresulttext(),
+                    interpretationText: calc.getInterpretationtext(),
+                  ),
                   //builder takes a function that requires context as the input parameter and returns the page that we want to push to.
                 ),
               );
